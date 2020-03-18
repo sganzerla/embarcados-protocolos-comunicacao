@@ -2,7 +2,9 @@
 <p>
 Desenvolvido pela Motorola, precisa apenas de 3 fios mais um para cada dispositivo interligado a ele para que possa realizar a comunicação entre todos. O seu propósito é interligar periféricos a um dispositivo mestre ligando os escravos em série.
 </p>
+
 ### Principais conexões
+
 <p>
 
 - MISO(Master In Slave Out): Uso do barramento slave para enviar dados do escravo para o mestre.
@@ -12,6 +14,7 @@ Desenvolvido pela Motorola, precisa apenas de 3 fios mais um para cada dispositi
 - SCLK(Serial Clock): O relógio de pulsos que sincroniza a transmissão de dados gerada pelo mestre.
 
 </p>
+
 #### Exemplo de ligação de dispositivos
 
 <p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/76923712-f9a48e80-68b2-11ea-9931-b6771902471f.png">
@@ -22,6 +25,7 @@ Os pinos SSX são os pinos de seleção (Slave Select), eles indicam qual dispos
 </p>
 
 #### Pontos importantes
+
 <p>
 
 - A velocidade máxima de comunição entre os dispositivos é controlada pelo primeiro parâmetro no SPISettings, um chip de 15MHz deve ser setado como 15 000 000.
