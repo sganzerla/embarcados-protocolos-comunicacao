@@ -18,11 +18,25 @@ O protocolo I2C funciona com a ideia de hierarquia onde existe um dispositivo me
 Para que seja possível que o mestre envie dados para um determinado escravo ele precisa saber o endereço, que está no formato hexadecimal, do dispositivo. Pode ocorrer, muito raramente, de dois dispositos totalmente diferentes possuírem o mesmo endereço nesses casos pode-se verificar se um dos dispositivos que estão em conflito possuem recurso para mudarem o endereço.   
 </p>
 
-Nesse exemplo o módulo I2C para Display LCD possui esse recurso, bastando fazer uma ligação de solda nos pinos A0, A1 ou A2.
+Nesse exemplo abaixo o módulo I2C para Display LCD possui esse recurso, bastando fazer uma ligação de solda nos pinos A0, A1 ou A2.
 
 <p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/76995597-d9b2b080-692e-11ea-8abc-f1f0983499db.png">
   <img src="https://user-images.githubusercontent.com/22710963/76995597-d9b2b080-692e-11ea-8abc-f1f0983499db.png" alt="reset" style="max-width:100%;"></a></p> 
 
+
+#### Transmissão de dados
+<p>
+É realizada com um bit de start (S) enviada pelo mestre, em seguida o endereço físico do escravo e no bit LSB informa-se o que deve ser feito: uma leitura (HIGH) ou uma escrita (LOW). Após o escravo receber o dado de start ele devolve um bit de reconhecimento (ACK) deixando o pino de SDA como LOW, disponível para o mestre.
+</p>
+
+<p>
+  Após o reconhecimento do dispositivo escravo o mestre envia os dados em duas partes, a primeira com 4 bits espera que o escravo retorne o bit de confirmação de recebimento para só então enviar a segunda com os outros 3 bits. Quando o escravo recebeu tudo corretamente ele permanece com o pino SDA como LOW até o mestre enviar a condição de STOP, caso contrário o escravo muda o valor para HIGH indicando não ter reconhecido o dado enviado pelo mestre.  
+  </p>
+  
+  <p>
+  <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/76998072-344e0b80-6933-11ea-91ec-cec615d8c269.png">
+  <img src="https://user-images.githubusercontent.com/22710963/76998072-344e0b80-6933-11ea-91ec-cec615d8c269.png" alt="reset" style="max-width:100%;"></a>  
+  </p>
 
  #### Fonte:
 
