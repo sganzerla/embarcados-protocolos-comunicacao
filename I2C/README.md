@@ -12,6 +12,16 @@ O protocolo I2C funciona com a ideia de hierarquia onde existe um dispositivo me
 <p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/76994427-1bdaf280-692d-11ea-9c8b-17a251de3d41.png">
   <img src="https://user-images.githubusercontent.com/22710963/76994427-1bdaf280-692d-11ea-9c8b-17a251de3d41.png" alt="reset" style="max-width:100%;"></a></p> 
 
+#### Endereços no barramento
+
+<p>
+Para que seja possível que o mestre envie dados para um determinado escravo ele precisa saber o endereço, que está no formato hexadecimal, do dispositivo. Pode ocorrer, muito raramente, de dois dispositos totalmente diferentes possuírem o mesmo endereço nesses casos pode-se verificar se um dos dispositivos que estão em conflito possuem recurso para mudarem o endereço.   
+</p>
+
+Nesse exemplo o módulo I2C para Display LCD possui esse recurso, bastando fazer uma ligação de solda nos pinos A0, A1 ou A2.
+
+<p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/76995597-d9b2b080-692e-11ea-8abc-f1f0983499db.png">
+  <img src="https://user-images.githubusercontent.com/22710963/76995597-d9b2b080-692e-11ea-8abc-f1f0983499db.png" alt="reset" style="max-width:100%;"></a></p> 
 
 
  #### Fonte:
