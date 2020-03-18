@@ -74,4 +74,4 @@ Os pinos SSX são os pinos de seleção (Slave Select), eles indicam qual dispos
 
 #### Fonte
 
-(Auto Core Robótica)[https://autocorerobotica.blog.br/conhecendo-o-protocolo-spi-com-arduino]
+[Auto Core Robótica](https://autocorerobotica.blog.br/conhecendo-o-protocolo-spi-com-arduino)
