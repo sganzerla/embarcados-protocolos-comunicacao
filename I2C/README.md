@@ -38,6 +38,14 @@ Nesse exemplo abaixo o módulo I2C para Display LCD possui esse recurso, bastand
   <img src="https://user-images.githubusercontent.com/22710963/76998072-344e0b80-6933-11ea-91ec-cec615d8c269.png" alt="reset" style="max-width:100%;"></a>  
   </p>
 
+
+#### Pinagem do protocolo I2C no Arduino
+
+<p>
+  <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/76998640-3795c700-6934-11ea-96ea-579073918844.png">
+  <img src="https://user-images.githubusercontent.com/22710963/76998640-3795c700-6934-11ea-96ea-579073918844.png" alt="reset" style="max-width:100%;"></a>  
+  </p>
+
  #### Fonte:
 
 http://autocorerobotica.blog.br/conhecendo-o-protocolo-i2c-com-arduino/
