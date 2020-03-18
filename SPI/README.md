@@ -65,7 +65,7 @@ Os pinos SSX são os pinos de seleção (Slave Select), eles indicam qual dispos
 
 </p>
 
-#### Pinos utilizados no protocolo SPI
+#### Pinagem do protocolo SPI no Arduino
 
 <p>
 <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/76925129-29559580-68b7-11ea-9267-c58700c13aca.png">
