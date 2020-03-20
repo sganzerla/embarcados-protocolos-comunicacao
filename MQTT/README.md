@@ -176,3 +176,5 @@ DISCONNECT
 [Embarcados](https://www.embarcados.com.br/mqtt-protocolos-para-iot)
 
 [HiveMQ](https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels)
+
+[Wikipedia](https://pt.wikipedia.org/wiki/MQTT)
