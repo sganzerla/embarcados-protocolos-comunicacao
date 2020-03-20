@@ -63,12 +63,59 @@ area/20/sensor/#
 
 ```
 
+</p>
 
+#### Qualidade do Serviço (QoS)
 
+<p>
+
+Os clientes (publicadores e assinantes) conectam-se ao broker originalmente por TCP, sendo opcionais login (usuário/senha) e uso de criptografia SSL/TLS. As conexões precisam definir um nível de qualidade de serviço para a relação entre os comunicantes e o broker. O nível de qualidade pode ser diferente para o publicador e para o assinante.
 
 </p>
+
+##### QoS 0 (at most once)
+
+<p>
+"Best effort" ou melhor esforço, parecida com o protocolo UDP, não se tem confirmação da entrega da mensagem, quem publica também não tem obrigação de manter a mensagem armazenada p/ realizar nova retransmissão. Essa modalidade deve ser usada quando ocasionalmente a perda de dados não tão prejuízos a aplicação ou quando os dados forem enviados em intervalos curtos.
  
+</p>
+ 
+<p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77193005-4ad39e80-6abc-11ea-9ab3-edc7c8290d18.png">
+  <img src="https://user-images.githubusercontent.com/22710963/77193005-4ad39e80-6abc-11ea-9ab3-edc7c8290d18.png" alt="reset" style="max-width:100%;"></a></p> 
+
+
+ ##### QoS 1 (at least once)
+ <p>
+
+Garante que uma mensagem seja entregue pelo menos uma vez ao destinatário. Existe a confirmação da entrega da mensagem. Quem envia a mensagem pode gerar várias mensagens iguais possivelmente por uma atraso na mensagem de confirmação de recebimento. Quem envia a mensagem deve manter a mensagem armazenada até que o receptor confirme o recebimento.
+
+Usar quando não se pode perder mensagens e é esperado uma entrega rápida, a aplicação porém precisa ser tolerante e tratar possíveis mensagens duplicadas.
+
+ </p>
+<p>
+<a target="_blank" href="https://user-images.githubusercontent.com/22710963/77193251-b584da00-6abc-11ea-810f-3603e6e2851e.png">
+<img src="https://user-images.githubusercontent.com/22710963/77193251-b584da00-6abc-11ea-810f-3603e6e2851e.png" style="max-with:100%;">
+</a>
+
+</p>
+
+ ##### QoS 2 (exactly once)
+ <p>
+
+Garante que a mensagem seja entregue exatamente uma vez, sendo retornado a confirmação do recebimento e a confirmação da confirmação do recebimento. É o nível mais seguro e mais lento. A confirmação de uma mensagem é feita por 4 handshake (aperto de mãos) entre remetente e destinatário.
+
+Usado quando é essencial que a aplicação receba exatamente uma vez a mesma mensagem pois uma mensagem duplicada pode trazer prejuízos aos clientes assinantes.
+ </p>
+
+<p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77194335-896a5880-6abe-11ea-89c3-f31f0b099795.png">
+  <img src="https://user-images.githubusercontent.com/22710963/77194335-896a5880-6abe-11ea-89c3-f31f0b099795.png" alt="reset" style="max-width:100%;"></a></p> 
+
+<p>
+Todas as mensagens enviadas com QoS 1 e 2 são enfileiradas para os assinantes que estiverem offline. No entanto essa fila só é possível se o cliente tiver uma sessão persistente.
+</p>
 
 #### Fonte
 
 [Embarcados](https://www.embarcados.com.br/mqtt-protocolos-para-iot)
+
+[HiveMQ](https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels)

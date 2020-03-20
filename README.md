@@ -6,6 +6,8 @@ A comunicação pode ocorrer pelos mais variados meios: serial, física, óptica
 
 - [I2C](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/I2C)
 
+- [MQTT](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/MQTT)
+
 - [SPI](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/SPI)
 
 - [UART](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/UART)
