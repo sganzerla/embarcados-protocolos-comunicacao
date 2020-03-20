@@ -75,6 +75,7 @@ Essa modalidade ignora o valor do routing key e utiliza atributos obtidos aparti
 </p>
 
 #### Filas (Queues)
+
 <p>
 Filas armazenam mensagens consumidas pelos clientes, elas possuem propriedades similares aos exchanges além de outras adicionais:
 
@@ -98,6 +99,7 @@ Quando uma mensagem não puder ser roteada a uma fila, porque não há ligaçõe
 </p>
 
 #### Consumidores
+
 <p>
 Consumidores podem acessar mensagens em filas de duas formas: 
 
@@ -109,6 +111,7 @@ Consumidores podem acessar mensagens em filas de duas formas:
 <p>
 Com API PUSH os clientes precisam assinar uma publicação específica para serem informados sobre novas mensagens. É possível ter mais de um cliente assinando uma fila ao mesmo tempo ou pode-se ter clientes exclusivos por fila. Cada consumidor possui um identificador e pode ser usado para cancelar sua inscrição.
 </p>
+
 #### Fonte:
 
 [Embarcados](https://www.embarcados.com.br/amqp-protocolo-de-comunicacao-para-iot)
