@@ -75,7 +75,7 @@ Essa modalidade ignora o valor do routing key e utiliza atributos obtidos aparti
 </p>
 
 #### Filas (Queues)
-
+<p>
 Filas armazenam mensagens consumidas pelos clientes, elas possuem propriedades similares aos exchanges além de outras adicionais:
 
 - Nome: podem ser definidos pelos clientes ou pelo broker
@@ -88,6 +88,27 @@ Filas armazenam mensagens consumidas pelos clientes, elas possuem propriedades s
 
 - Argumentos: campo opcional usado por plugins para informar TTL, ou limite do tamanho da fila.
 
+</p>
+
+#### Ligações (Bindings)
+
+<p>
+São regras que exchange usa pra rotear as mensagens para as filas. As ligações podem utilizar um atributo de chave opcional para filtrar ou rotear as mensagens para as filas.
+Quando uma mensagem não puder ser roteada a uma fila, porque não há ligações para o exchange na qual foi publicada, ela será descartada ou devolvida para o publicador dependendo do atributo definido pelo publicador.
+</p>
+
+#### Consumidores
+<p>
+Consumidores podem acessar mensagens em filas de duas formas: 
+
+- recebendo notificação de que há mensagens (push API)
+
+- buscando por mensagens quando for preciso (pull API)
+</p>
+
+<p>
+Com API PUSH os clientes precisam assinar uma publicação específica para serem informados sobre novas mensagens. É possível ter mais de um cliente assinando uma fila ao mesmo tempo ou pode-se ter clientes exclusivos por fila. Cada consumidor possui um identificador e pode ser usado para cancelar sua inscrição.
+</p>
 #### Fonte:
 
 [Embarcados](https://www.embarcados.com.br/amqp-protocolo-de-comunicacao-para-iot)
