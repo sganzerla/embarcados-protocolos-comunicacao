@@ -115,6 +115,62 @@ Usado quando é essencial que a aplicação receba exatamente uma vez a mesma me
 Todas as mensagens enviadas com QoS 1 e 2 são enfileiradas para os assinantes que estiverem offline. No entanto essa fila só é possível se o cliente tiver uma sessão persistente.
 </p>
 
+
+#### Métodos MQTT
+
+<p>
+
+MQTT define pacotes de controle (Control Packets) para indicar a ação desejada a ser executada pelo recurso desejado. Eles são os seguintes:
+
+```
+
+CONNECT
+    Cliente solicita uma ligação com um servidor
+
+CONNACK
+    Reconhece solicitação de conexão
+
+PUBLISH
+    publicar mensagem
+
+PUBACK
+    reconhecimento de publicação
+
+PUBREC
+    Publicação recebida.(QoS 2 Publicação recebida., part 1)
+
+PUBREL
+    Publicação publicada. (QoS 2 Publicação recebida., part 2)
+
+PUBCOMP
+    Publicação completada. (QoS 2 Publicação recebida., part 3)
+
+SUBSCRIBE
+    Inscrever-se em um tópico
+
+SUBACK
+    Reconhecimento de inscrição
+
+UNSUBSCRIBE
+    Cancelamento de inscrição em um tópico
+
+UNSUBACK
+    Reconhecimento de cancelamento de inscrição.
+
+PINGREQ
+    PING request
+
+PINGRESP
+    PING response
+
+DISCONNECT
+    Notificação de desconexão
+
+``` 
+
+</p>
+
+
 #### Fonte:
 
 [Embarcados](https://www.embarcados.com.br/mqtt-protocolos-para-iot)
