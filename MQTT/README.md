@@ -6,7 +6,8 @@ Desenvolvido pela IBM no final dos anos 90, originalmente para sistemas de super
 ### Funcionamento
 
 <p>
-MQTT funciona  no paradigma publish/subscribe. Sendo um broker para receber mensagens de publicadores quanto para enviar mensagens para quem assina as publicações dos publicadores. Um dos broker mais populares desse protocolo é o [Mosquito](http://mosquitto.org/) .
+
+MQTT funciona  no paradigma publish/subscribe. Sendo um broker para receber mensagens de publicadores quanto para enviar mensagens para quem assina as publicações dos publicadores. Um dos broker mais populares desse protocolo é o Mosquito](http://mosquitto.org) .
 
 <p> 
 
@@ -114,7 +115,7 @@ Usado quando é essencial que a aplicação receba exatamente uma vez a mesma me
 Todas as mensagens enviadas com QoS 1 e 2 são enfileiradas para os assinantes que estiverem offline. No entanto essa fila só é possível se o cliente tiver uma sessão persistente.
 </p>
 
-#### Fonte
+#### Fonte:
 
 [Embarcados](https://www.embarcados.com.br/mqtt-protocolos-para-iot)
 
