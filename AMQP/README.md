@@ -14,7 +14,7 @@ Originalmente desenvolvido pela comunidade do mercado financeiro visava permitir
 #### Broker
 
 <p>
-Broker é uma entidade que recebe mensagens de publicadores, alguns clientes produzem mensagens como os publicadores e outras assinam mensagens, esses são clientes conhecidos como consumidores. AMQP é um protocolo bi-direcional onde o cliente pode enviar e receber mensagens através do broker.
+Broker é uma entidade que recebe mensagens de publicadores, alguns clientes produzem mensagens como os publicadores e outras assinam mensagens, esses são clientes conhecidos como consumidores. AMQP é um protocolo bi-direcional onde o cliente pode enviar e receber mensagens através do broker. Um dos principais Broker deste tipo é o RabbitMQ
 </p>
 
 <p>
@@ -44,57 +44,38 @@ Entrega mensagens às filas de acordo com o "routing key" definido na mensagem, 
   <img src="https://user-images.githubusercontent.com/22710963/77130121-66e02d00-6a35-11ea-9766-4b5b7d5f056b.png" alt="reset" style="max-width:100%;"></a></p> 
 
 <p>
+
+##### Topic Exchange 
+
+Comunicação padrão do tipo publicador/assinante (publish/subscribe), é utilizado para monitorar mensagens de acordo com critérios no routing key da mensagem. O assinante pode escolher que tipo de mensagem deseja receber e o publicador pode definir um assunto/tópico através do routing key para a mensagem.
  
 </p>
 
-#### Pontos importantes
+Imagem exibe o roteamento de mensagem com "routing key" igual a "kern.warning" para 3 tópicos sendo apenas uma compatível com a chave. Os critérios de filtro são :
 
+- "*" pode substituir uma palavra no "binding key"
+
+- "#" pode substituir uma ou mais palavras no "binding key"
+
+<p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77130549-2a153580-6a37-11ea-9904-6bcec6684e38.png">
+  <img src="https://user-images.githubusercontent.com/22710963/77130549-2a153580-6a37-11ea-9904-6bcec6684e38.png" alt="reset" style="max-width:100%;"></a></p> 
+
+##### Fanout Exchange
 <p>
-
-- A velocidade máxima de comunição entre os dispositivos é controlada pelo primeiro parâmetro no SPISettings, um chip de 15MHz deve ser setado como 15 000 000.
-
-- O deslocamento de dados pode ser feito tanto pelo "bit mais significativo" (MSB) quanto pelo "bit menos significativo" (LSB). Isso é definido pelo segundo parâmetro do SPISettings, MSBFIRST ou LSBFIRST.
-
-
+Encaminha mensagens recebidas para todas as filas vinculadas ao exchange. A chave do roteamento das mensagens é ignorada e uma cópia da mensagem é encaminhada para cada assinante. 
+Essa modalidade é bastante utilizada em jogos do tipo MMO (Massively multi-player) onde as atualizações do placar ou outros eventos globais precisam ser compartilhados por todos os jogadores.
 </p>
 
-#### Vantagens
-
+##### Headers Exchange
 <p>
-
-- Comunicação Full Duplex
-
-- Flexibilidade no protocolo completo para os bits transferidos.
-
-- Requer menos energia que o I2C por ter menos circuitos.
-
-- Não requer resistores do tipo pull-up.
-
-- Escravos não precisam de endereço único.
-
+Essa modalidade ignora o valor do routing key e utiliza atributos obtidos apartir do header. Uma mensagem é considerada correspondente quando o valor do cabeçalho for igual ao valor especificado nas regras do binding.
+</p>
+<p>
+É possível vincular uma fila a um exchange utilizando mais de um cabeçalho como critério. Porém deve-se observar a configuração no broker para que ocorra a correspondência ao critério, isso é feito através do argumento setado em "x-match" se for definido como "any" qualquer um dos valores do cabeçalho que corresponder é o suficiente mas se for setado como "all" todos os valores do cabeçalho precisam corresponder para entrar na fila.
 </p>
 
-#### Desvantagens
+#### Fonte:
 
-<p>
+[Embarcados](https://www.embarcados.com.br/amqp-protocolo-de-comunicacao-para-iot)
 
-- Requer mais pinos CI.
-
-- Não há reconhecimento do escravo.
-
-- Suporta apenas um dispositivo mestre.
-
-- Nenhum protocolo de verificação de erros é definido.
-
-</p>
-
-#### Pinagem do protocolo SPI no Arduino
-
-<p>
-<a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/76925129-29559580-68b7-11ea-9267-c58700c13aca.png">
-  <img src="https://user-images.githubusercontent.com/22710963/76925129-29559580-68b7-11ea-9267-c58700c13aca.png" alt="reset" style="max-width:100%;"></a></p> 
-
-
-#### Fonte
-
-[Auto Core Robótica](https://autocorerobotica.blog.br/conhecendo-o-protocolo-spi-com-arduino)
+[RabbitMQ](https://www.rabbitmq.com/tutorials/amqp-concepts.html)
