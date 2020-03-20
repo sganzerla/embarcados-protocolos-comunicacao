@@ -74,6 +74,20 @@ Essa modalidade ignora o valor do routing key e utiliza atributos obtidos aparti
 É possível vincular uma fila a um exchange utilizando mais de um cabeçalho como critério. Porém deve-se observar a configuração no broker para que ocorra a correspondência ao critério, isso é feito através do argumento setado em "x-match" se for definido como "any" qualquer um dos valores do cabeçalho que corresponder é o suficiente mas se for setado como "all" todos os valores do cabeçalho precisam corresponder para entrar na fila.
 </p>
 
+#### Filas (Queues)
+
+Filas armazenam mensagens consumidas pelos clientes, elas possuem propriedades similares aos exchanges além de outras adicionais:
+
+- Nome: podem ser definidos pelos clientes ou pelo broker
+
+- Durabilidade: filas duráveis sobrevivem ao reinicio de um broker, as não duráveis são chamadas de transitórias. Uma fila durável não significa que as suas mensagens também sejam, serão recuperadas apenas as mensagens persistentes.
+
+- Exclusiva: usada apenas por uma conexão e será excluída quando a conexão for fechada.
+
+- Auto-Exclusão: a fila que possuir ao menos um consumidor é excluída quando o último cliente cancelar a assinatura.
+
+- Argumentos: campo opcional usado por plugins para informar TTL, ou limite do tamanho da fila.
+
 #### Fonte:
 
 [Embarcados](https://www.embarcados.com.br/amqp-protocolo-de-comunicacao-para-iot)
