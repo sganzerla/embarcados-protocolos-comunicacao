@@ -7,7 +7,7 @@ Desenvolvido pela IBM no final dos anos 90, originalmente para sistemas de super
 
 <p>
 
-MQTT funciona  no paradigma publish/subscribe. Sendo um broker para receber mensagens de publicadores quanto para enviar mensagens para quem assina as publicações dos publicadores. Um dos broker mais populares desse protocolo é o Mosquito](http://mosquitto.org) .
+MQTT funciona  no paradigma publish/subscribe. Sendo um broker para receber mensagens de publicadores quanto para enviar mensagens para quem assina as publicações dos publicadores. Um dos broker mais populares desse protocolo é o Mosquito](http://mosquitto.org) 
 
 <p> 
 
