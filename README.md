@@ -6,8 +6,10 @@ A comunicação pode ocorrer pelos mais variados meios: serial, física, óptica
 
 - [I2C](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/I2C) - (Inter-Integrated Circuit / Circuito InterIntegrado)
 
-- [MQTT](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/MQTT) - (Message Queue Telemetry Transport / Transporte Telemetria de Filas de Mensagens)
+- [MQTT](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/MQTT) - (Message Queue Telemetry Transport /  Filas de Transporte de Mensagens deTelemetria)
 
-- [SPI](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/SPI) - (Serial Peripheral Interface / Interface Periféricos Serial)
+- [NFC](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/NFC) - (Near Field Communication / Comunicação por campo de proximidade)
+
+- [SPI](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/SPI) - (Serial Peripheral Interface / Serial Protocolo de Interface Periférica)
 
 - [UART](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/UART) - (Universal Asynchrounous Receiver/Transmiter ou Receptor/Transmissor Universal Assíncrono)
