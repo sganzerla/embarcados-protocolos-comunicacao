@@ -1,6 +1,6 @@
 # Protocolo NFC (Near Field Communication)
 <p>
- É um padrão de comunicação sem fio ponto a ponto, de curtíssimo alcance, que permite a troca de dados entre dois dispositivos eletrônicos a poucos centímetros de distância. Foi desenvolvido num consórcio entre as empresas Philips, Sony e Nokia entre 2002 e 2004.
+ É um padrão de comunicação sem fio ponto a ponto, de curtíssimo alcance, que permite a troca de dados entre dois dispositivos eletrônicos a poucos centímetros de distância. Foi desenvolvido num consórcio entre as empresas Philips, Sony e Nokia entre 2002 e 2004. É um subconjunto do RFID. 
 </p>
  É o padrão que funciona na menor distância e com a menor taxa de transferência de dados.
 <p>
