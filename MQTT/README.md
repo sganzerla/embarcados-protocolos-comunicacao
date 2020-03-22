@@ -170,6 +170,25 @@ DISCONNECT
 </p>
 
 
+Abaixo uma lista de servers (brokers) e clients (publish e subscribe):
+
+| Nome  |  Desenvolvedor  |  Licença  |  Linguagem  | Tipo  |
+| ------------------- | ------------------- | ------------------- | ------------------- | ------------------- |  
+| [Adafruit IO](https://io.adafruit.com/) | Adafruit | MIT License | Ruby on Rails, Node.js,Python | Client |
+| [HiveMQ MQTT Client](https://github.com/hivemq/hivemq-mqtt-client) | dc-square GmbH |Apache License version 2.0 | Java | Client |
+| [M2Mqtt](https://github.com/eclipse/paho.mqtt.m2mqtt) | Eclipse | Eclipse Public License 1.0 | C# | Client |
+| [Mosquitto](https://github.com/eclipse/mosquitto) | Eclipse | Eclipse Public License 1.0, Eclipse Distribution License 1.0 (BSD) | C | Client e Broker |
+| [Paho MQTT](https://github.com/eclipse/paho.mqtt.embedded-c) | Eclipse | Eclipse Public License 1.0, Eclipse Distribution License 1.0 (BSD)[ | C, C++, Java, JavaScript, Python, Go | Client |
+
+
+#### SandBox Broker
+
+- http://www.hivemq.com/demos/websocket-client/
+
+- https://iot.eclipse.org/projects/sandboxes/
+
+
+
 #### Fonte:
 
 [Embarcados](https://www.embarcados.com.br/mqtt-protocolos-para-iot)
