@@ -35,20 +35,20 @@ Desenvolvido no período da Segunda Guerra Mundial era utilizado por radares par
 </p>
 
 
-<p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77255992-32918a00-6c4a-11ea-8854-b074e3865a54.png
-">
-  <img src="https://user-images.githubusercontent.com/22710963/77255992-32918a00-6c4a-11ea-8854-b074e3865a54.png
-" alt="reset" style="max-width:100%;"></a></p> 
+<p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77255992-32918a00-6c4a-11ea-8854-b074e3865a54.png">
+  <img src="https://user-images.githubusercontent.com/22710963/77255992-32918a00-6c4a-11ea-8854-b074e3865a54.png" alt="reset" style="max-width:100%;"></a></p> 
 
 <p>
 
 #### Faixas de frequência de operação
 
 <p>
+  
 Sistemas  RFID trabalham com ondas eletromagnéticas e são classificadas como sistemas de rádio e para que não interfiram em serviços de rádio já existentes como: polícia, serviços de segurança, serviços marinhos/aeronaúticos e telefones móveis a escala de frequência de operção para a aplicações indutriais e científicas é restrita.
 </p>
 
 <p>
+  
 - Sistemas de Baixa Frequência (30KHz a 500KHz): curta distância com baixo custo operacional. Útil para controle de acesso, rastreabilidade e identificação.
 
 - Sistemas de Alta Frequência (850MHz a 950MHz e 2,4GHz a 2,5GHz): leitura em médias e longas distâncias com alta velocidade de leitura. Útil para leitura em veículos e coleta automática de dados.
