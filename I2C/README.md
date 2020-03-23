@@ -28,6 +28,20 @@ Nesse exemplo abaixo o módulo I2C para Display LCD possui esse recurso, bastand
 <p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/76995597-d9b2b080-692e-11ea-8abc-f1f0983499db.png">
   <img src="https://user-images.githubusercontent.com/22710963/76995597-d9b2b080-692e-11ea-8abc-f1f0983499db.png" alt="reset" style="max-width:100%;"></a></p> 
 
+Ligação de Tela LCD sem conexão I2C
+<p>
+  <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77276324-208b0800-6c99-11ea-99e8-d427963341ab.png">
+  <img src="https://user-images.githubusercontent.com/22710963/77276324-208b0800-6c99-11ea-99e8-d427963341ab.png" alt="reset" style="max-width:100%;"></a>  
+  </p>
+
+Ligação de Tela LCD com conexão I2C
+<p>
+  <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77276798-41079200-6c9a-11ea-909d-0f4c87a70b27.png">
+  <img src="https://user-images.githubusercontent.com/22710963/77276798-41079200-6c9a-11ea-909d-0f4c87a70b27.png" alt="reset" style="max-width:100%;"></a>  
+  </p>
+
+
+
 
 #### Transmissão de dados
 <p>
@@ -42,8 +56,6 @@ Nesse exemplo abaixo o módulo I2C para Display LCD possui esse recurso, bastand
 <p>
   Após o reconhecimento do dispositivo escravo o mestre envia os dados em duas partes, a primeira com 4 bits espera que o escravo retorne o bit de confirmação de recebimento para só então enviar a segunda com os outros 3 bits. Quando o escravo recebeu tudo corretamente ele permanece com o pino SDA como LOW até o mestre enviar a condição de STOP, caso contrário o escravo muda o valor para HIGH indicando não ter reconhecido o dado enviado pelo mestre.  
   </p>
-
-
 
 #### Pinagem do protocolo I2C no Arduino
 
