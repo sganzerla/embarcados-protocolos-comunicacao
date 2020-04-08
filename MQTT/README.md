@@ -22,7 +22,6 @@ MQTT funciona  no paradigma publish/subscribe. Sendo um broker para receber mens
 Os seguintes tópicos abaixo de temperatura e umidade são oriundos de duas áreas diferentes (10, 20), monitorados por 4 sensores diferentes (5000, 5001, 4000, 4001) e registram duas informações distintas (temperatura e umidade):
 
 ```
-
   - area/10/sensor/5000/temperatura
 
   - area/10/sensor/5000/umidade
@@ -38,8 +37,6 @@ Os seguintes tópicos abaixo de temperatura e umidade são oriundos de duas áre
   - area/20/sensor/4001/temperatura
 
   - area/20/sensor/4001/umidade
-
-
 ```
 
 </p>
@@ -50,18 +47,13 @@ Os assinantes podem se inscrever para assinar essas publicações especificando 
 - Para assinar todas as publicações dos sensores de temperatura da área 10 o assinante poderia utilizar o caracter coringa mais ("+")
 
 ```
-
  area/10/sensor/+/temperatura
-
 ```
 
 - Para monitorar todos os sensores da área 20 poderia ser utilizado o caracter sharp ("#") que significa "qualquer coisa abaixo do nível desse tópico "
 
 ```
-
 area/20/sensor/#
-
-
 ```
 
 </p>
@@ -123,7 +115,6 @@ Todas as mensagens enviadas com QoS 1 e 2 são enfileiradas para os assinantes q
 MQTT define pacotes de controle (Control Packets) para indicar a ação desejada a ser executada pelo recurso desejado. Eles são os seguintes:
 
 ```
-
 CONNECT
     Cliente solicita uma ligação com um servidor
 
@@ -165,7 +156,6 @@ PINGRESP
 
 DISCONNECT
     Notificação de desconexão
-
 ``` 
 </p>
 
@@ -191,10 +181,8 @@ Abaixo uma lista de servers (brokers) e clients (publish e subscribe):
 
 Demonstração realizada com publicador e assinante dentro da mesma máquina.
 <p>
-    <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/78743497-289fa480-7935-11ea-8229-f3050a8a8069.png
-">
-  <img src="https://user-images.githubusercontent.com/22710963/78743497-289fa480-7935-11ea-8229-f3050a8a8069.png
-" alt="reset" style="max-width:100%;">
+    <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/78743497-289fa480-7935-11ea-8229-f3050a8a8069.png">
+  <img src="https://user-images.githubusercontent.com/22710963/78743497-289fa480-7935-11ea-8229-f3050a8a8069.png" alt="reset" style="max-width:100%;">
   </a>
 </p> 
 
@@ -209,7 +197,6 @@ $ sudo apt-get install ufw
 $ sudo ufw allow 1883/tcp 
 $ sudo ufw enable
 $ sudo ufw status verbose
-
 ```
 
 <p>
