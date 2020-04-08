@@ -180,19 +180,36 @@ Abaixo uma lista de servers (brokers) e clients (publish e subscribe):
 | [Mosquitto](https://github.com/eclipse/mosquitto) | Eclipse | Eclipse Public License 1.0, Eclipse Distribution License 1.0 (BSD) | C | Client e Broker |
 | [Paho MQTT](https://github.com/eclipse/paho.mqtt.embedded-c) | Eclipse | Eclipse Public License 1.0, Eclipse Distribution License 1.0 (BSD)[ | C, C++, Java, JavaScript, Python, Go | Client |
 
-
 #### SandBox Broker
 
 - http://www.hivemq.com/demos/websocket-client/
 
 - https://iot.eclipse.org/projects/sandboxes/
 
+#### Mosquitto Broker 
 
 
-#### Fonte:
+##### Server Ubuntu
+
+
+
+##### Client Raspberry
+
+
+
+#### Client Nodemcu
+
+
+
+
+#### Fonte
 
 [Embarcados](https://www.embarcados.com.br/mqtt-protocolos-para-iot)
 
 [HiveMQ](https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels)
 
 [Wikipedia](https://pt.wikipedia.org/wiki/MQTT)
+
+[VULTR](https://www.vultr.com/docs/how-to-install-mosquitto-mqtt-broker-server-on-ubuntu-16-04)
+
+[FilipeFlop](https://www.filipeflop.com/blog/controle-monitoramento-iot-nodemcu-e-mqtt/)
