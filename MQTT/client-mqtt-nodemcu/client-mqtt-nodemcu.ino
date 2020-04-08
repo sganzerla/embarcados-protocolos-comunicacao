@@ -1,4 +1,4 @@
-https://www.filipeflop.com/blog/controle-monitoramento-iot-nodemcu-e-mqtt/
+// https://www.filipeflop.com/blog/controle-monitoramento-iot-nodemcu-e-mqtt/
 
 //Programa: NodeMCU e MQTT - Controle e Monitoramento IoT
 //Autor: Pedro Bertoleti
@@ -8,8 +8,8 @@ https://www.filipeflop.com/blog/controle-monitoramento-iot-nodemcu-e-mqtt/
  
 //defines:
 //defines de id mqtt e tópicos para publicação e subscribe
-#define TOPICO_SUBSCRIBE "MQTTFilipeFlopEnvia"     //tópico MQTT de escuta
-#define TOPICO_PUBLISH   "MQTTFilipeFlopRecebe"    //tópico MQTT de envio de informações para Broker
+#define TOPICO_SUBSCRIBE "test"     //tópico MQTT de escuta
+#define TOPICO_PUBLISH   "test"    //tópico MQTT de envio de informações para Broker
                                                    //IMPORTANTE: recomendamos fortemente alterar os nomes
                                                    //            desses tópicos. Caso contrário, há grandes
                                                    //            chances de você controlar e monitorar o NodeMCU
@@ -36,11 +36,11 @@ https://www.filipeflop.com/blog/controle-monitoramento-iot-nodemcu-e-mqtt/
  
  
 // WIFI
-const char* SSID = "SSID"; // SSID / nome da rede WI-FI que deseja se conectar
-const char* PASSWORD = "SENHA"; // Senha da rede WI-FI que deseja se conectar
+const char* SSID = "Wii"; // SSID / nome da rede WI-FI que deseja se conectar
+const char* PASSWORD = "123456"; // Senha da rede WI-FI que deseja se conectar
   
 // MQTT
-const char* BROKER_MQTT = "iot.eclipse.org"; //URL do broker MQTT que se deseja utilizar
+const char* BROKER_MQTT = "177.2.48.33"; //URL do broker MQTT que se deseja utilizar
 int BROKER_PORT = 1883; // Porta do Broker MQTT
  
  
