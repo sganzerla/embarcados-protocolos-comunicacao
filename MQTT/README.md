@@ -216,8 +216,35 @@ $ sudo apt-get install mosquitto
 Criar tópico e enviar mensagem sem autenticação 
 
 ```
-$ sudo mosquitto_pub -m "olá clientes do topico_test" -t "test"
+$ sudo mosquitto_pub -m "mensagem enviada sem autenticação" -t "test"
 ```
+
+Criar usuário e senha p/ publicar mensagens e assinar publicações
+
+```
+$ sudo mosquitto_passwd -c /etc/mosquitto/passwd algum-login
+Password: password
+```
+
+Criar o arquivo de configuração do mosquitto
+
+```
+$ sudo nano /etc/mosquitto/conf.d/default.conf
+``` 
+
+Desabilitar acesso anônimo e indicar lista de usuários. Colar dentro de default.conf
+
+```
+allow_anonymous false
+password_file /etc/mosquitto/passwd
+``` 
+
+Reiniciar serviço para pegar as mudanças
+
+```
+$ sudo systemctl restart mosquitto
+```
+
 
 ##### Client Raspberry
 
@@ -227,12 +254,19 @@ Instalar Mosquitto-client
 $ sudo apt-get install mosquitto-clients
 ```
 
-Fazer inscrição em um tópico do broker
+Fazer inscrição em um tópico do broker sem autenticação
 
 ```
 $ sudo mosquitto_sub -t "test"
 
 ```
+
+Publicar mensagem em um tópico com autenticação
+
+```
+$ sudo mosquitto_pub -t "test" -m "mensagem enviada com autenticação" -u "algum-login" -P "password"
+
+
 
 ##### Client Nodemcu](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/MQTT/client-mqtt-nodemcu) -  Exemplo
 
