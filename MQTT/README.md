@@ -188,18 +188,53 @@ Abaixo uma lista de servers (brokers) e clients (publish e subscribe):
 
 #### Mosquitto Broker 
 
-
 ##### Server Ubuntu
 
+Liberar no firewall porta padrão TCP 1883
 
+```
+$ sudo apt-get install ufw
+$ sudo ufw allow 1883/tcp 
+$ sudo ufw enable
+$ sudo ufw status verbose
+
+```
+
+<p>
+    <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/78740251-ad39f500-792c-11ea-8f40-0b17a5ed22a7.png">
+  <img src="https://user-images.githubusercontent.com/22710963/78740251-ad39f500-792c-11ea-8f40-0b17a5ed22a7.png" alt="reset" style="max-width:100%;">
+  </a>
+</p> 
+
+Instalar broker
+
+```
+$ sudo apt-get update
+$ sudo apt-get install mosquitto
+```
+
+Criar tópico e enviar mensagem sem autenticação 
+
+```
+$ sudo mosquitto_pub -m "olá clientes do topico_test" -t "test"
+```
 
 ##### Client Raspberry
 
+Instalar Mosquitto-client 
 
+```
+$ sudo apt-get install mosquitto-clients
+```
 
-#### Client Nodemcu
+Fazer inscrição em um tópico do broker
 
+```
+$ sudo mosquitto_sub -t "test"
 
+```
+
+##### Client Nodemcu](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/MQTT/client-mqtt-nodemcu) -  Exemplo
 
 
 #### Fonte
