@@ -244,7 +244,11 @@ Reiniciar serviço para pegar as mudanças
 ```
 $ sudo systemctl restart mosquitto
 ```
+Publicar mensagem em um tópico com autenticação
 
+```
+$ sudo mosquitto_pub -t "test" -m "mensagem enviada com autenticação" -u "algum-login" -P "password"
+```
 
 ##### Client Raspberry
 
@@ -254,18 +258,24 @@ Instalar Mosquitto-client
 $ sudo apt-get install mosquitto-clients
 ```
 
-Fazer inscrição em um tópico do broker sem autenticação
+Fazer inscrição em um tópico sem autenticação
 
 ```
 $ sudo mosquitto_sub -t "test"
-
 ```
 
-Publicar mensagem em um tópico com autenticação
+Fazer inscrição em um tópico com autenticação
 
 ```
-$ sudo mosquitto_pub -t "test" -m "mensagem enviada com autenticação" -u "algum-login" -P "password"
+$ sudo mosquitto_sub -t "test" -u "algum_user" -P "password"
+```
 
+Caso um cliente assine um tópico que exija autenticação sem enviar os parâmetros corretos receberá a mensagem de erro, o mesmo pode ocorrer quando um tópico originalmente anônimo passa a ser autenticado derrubando os clientes antes conectados.
+
+```
+Connection Refused: not authorised.
+Error: The connection was refused.
+```
 
 
 ##### Client Nodemcu](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/MQTT/client-mqtt-nodemcu) -  Exemplo
