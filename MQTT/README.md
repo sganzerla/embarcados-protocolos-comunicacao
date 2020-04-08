@@ -188,6 +188,18 @@ Abaixo uma lista de servers (brokers) e clients (publish e subscribe):
 
 #### Mosquitto Broker 
 
+
+Demonstração realizada com publicador e assinante dentro da mesma máquina.
+<p>
+    <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/78743497-289fa480-7935-11ea-8229-f3050a8a8069.png
+">
+  <img src="https://user-images.githubusercontent.com/22710963/78743497-289fa480-7935-11ea-8229-f3050a8a8069.png
+" alt="reset" style="max-width:100%;">
+  </a>
+</p> 
+
+
+
 ##### Server Ubuntu
 
 Liberar no firewall porta padrão TCP 1883
@@ -267,7 +279,7 @@ $ sudo mosquitto_sub -t "test"
 Fazer inscrição em um tópico com autenticação
 
 ```
-$ sudo mosquitto_sub -t "test" -u "algum_user" -P "password"
+$ sudo mosquitto_sub -t "test" -u "algum-login" -P "password"
 ```
 
 Caso um cliente assine um tópico que exija autenticação sem enviar os parâmetros corretos receberá a mensagem de erro, o mesmo pode ocorrer quando um tópico originalmente anônimo passa a ser autenticado derrubando os clientes antes conectados.
