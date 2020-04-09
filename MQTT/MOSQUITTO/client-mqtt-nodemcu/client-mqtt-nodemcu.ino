@@ -37,10 +37,10 @@
  
 // WIFI
 const char* SSID = "Wii"; // SSID / nome da rede WI-FI que deseja se conectar
-const char* PASSWORD = "123456"; // Senha da rede WI-FI que deseja se conectar
+const char* PASSWORD = "12345678"; // Senha da rede WI-FI que deseja se conectar
   
 // MQTT
-const char* BROKER_MQTT = "177.2.48.33"; //URL do broker MQTT que se deseja utilizar
+const char* BROKER_MQTT = "192.168.1.7"; //URL do broker MQTT que se deseja utilizar
 int BROKER_PORT = 1883; // Porta do Broker MQTT
  
  
