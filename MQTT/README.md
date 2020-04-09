@@ -180,12 +180,6 @@ Abaixo uma lista de servers (brokers) e clients (publish e subscribe):
 
 
 Demonstração realizada com publicador e assinante dentro da mesma máquina.
-<p>
-    <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/78743497-289fa480-7935-11ea-8229-f3050a8a8069.png">
-  <img src="https://user-images.githubusercontent.com/22710963/78743497-289fa480-7935-11ea-8229-f3050a8a8069.png" alt="reset" style="max-width:100%;">
-  </a>
-</p> 
-
  
 <details><summary>  Ver como implementar mosquitto </summary>
 <p>
@@ -277,7 +271,15 @@ Caso um cliente assine um tópico que exija autenticação sem enviar os parâme
 Connection Refused: not authorised.
 Error: The connection was refused.
 ```
+
 </p>
+
+<p>
+    <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/78743497-289fa480-7935-11ea-8229-f3050a8a8069.png">
+  <img src="https://user-images.githubusercontent.com/22710963/78743497-289fa480-7935-11ea-8229-f3050a8a8069.png" alt="reset" style="max-width:100%;">
+  </a>
+</p> 
+
 
 ##### [Client Nodemcu](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/MQTT/client-mqtt-nodemcu) -  Exemplo
 
