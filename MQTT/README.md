@@ -186,7 +186,9 @@ Demonstração realizada com publicador e assinante dentro da mesma máquina.
   </a>
 </p> 
 
-
+ 
+<details><summary>  Ver como implementar mosquitto </summary>
+<p>
 
 ##### Server Ubuntu
 
@@ -275,7 +277,7 @@ Caso um cliente assine um tópico que exija autenticação sem enviar os parâme
 Connection Refused: not authorised.
 Error: The connection was refused.
 ```
-
+</p>
 
 ##### [Client Nodemcu](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/MQTT/client-mqtt-nodemcu) -  Exemplo
 
