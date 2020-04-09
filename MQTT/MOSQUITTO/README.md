@@ -1,5 +1,8 @@
 # Broker Mosquitto
  
+ ##### [Cliente Nodemcu](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/MQTT/MOSQUITTO/client-mqtt-auth) - EXemplo de cliente Nodemcu com autenticação
+
+ 
 
 #### SandBox Broker
 
@@ -81,8 +84,6 @@ $ sudo mosquitto_pub -t "casa/L2" -m "mensagem enviada com autenticação" -u "y
 $ sudo mosquitto_pub -m "mensagem enviada sem autenticação" -t "casa/L2"
 ```
 
-##### [Cliente Nodemcu](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/MQTT/MOSQUITTO/client-mqtt-auth) - Com autenticação
-
 ##### Client Raspberry
 
 1) Instalar Mosquitto-client
@@ -97,7 +98,7 @@ $ sudo apt-get install mosquitto-clients
 $ sudo mosquitto_sub -t "casa/L2"
 ```
 
-Fazer inscrição em um tópico com autenticação
+3) Fazer inscrição em um tópico com autenticação
 
 ```
 $ sudo mosquitto_sub -t "casa/L2" -u "yuri" -P "password"
