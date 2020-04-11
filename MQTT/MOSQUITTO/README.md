@@ -1,5 +1,8 @@
 # Broker Mosquitto
  
+ ##### [Cliente Nodemcu](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/MQTT/MOSQUITTO/client-mqtt-auth) - EXemplo de cliente Nodemcu com autenticação
+
+ 
 
 #### SandBox Broker
 
@@ -9,11 +12,11 @@
 
 #### Mosquitto Broker
 
-Demonstração realizada com publicador e assinante dentro da mesma máquina.
+Demonstração realizada com publicador e assinante dentro da mesma máquina e com um assinante Nodemcu
  
 <p>
-    <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/78743497-289fa480-7935-11ea-8229-f3050a8a8069.png">
-  <img src="https://user-images.githubusercontent.com/22710963/78743497-289fa480-7935-11ea-8229-f3050a8a8069.png" alt="reset" style="max-width:100%;">
+    <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/78854811-a1b40000-79f8-11ea-87ee-401fb2c96f4b.png">
+  <img src="https://user-images.githubusercontent.com/22710963/78854811-a1b40000-79f8-11ea-87ee-401fb2c96f4b.png" alt="reset" style="max-width:100%;">
   </a>
 </p>
 
@@ -41,62 +44,64 @@ $ sudo apt-get update
 $ sudo apt-get install mosquitto
 ```
 
-3.1) Criar tópico e enviar mensagem sem autenticação
+Caso queira utilizar sem autenticação já está pronto para uso pule para o passo 8,
+senão precisa ser criado usuário e senha para os clientes.
+
+3) Criar usuário e senha p/ publicar mensagens e assinar publicações
 
 ```
-$ sudo mosquitto_pub -m "mensagem enviada sem autenticação" -t "test"
-```
-
-3.2) Criar usuário e senha p/ publicar mensagens e assinar publicações
-
-```
-$ sudo mosquitto_passwd -c /etc/mosquitto/passwd algum-login
+$ sudo mosquitto_passwd -c /etc/mosquitto/passwd yuri
 Password: password
 ```
 
-3.2.1) Criar o arquivo de configuração do mosquitto
+4) Criar o arquivo de configuração do mosquitto
 
 ```
 $ sudo nano /etc/mosquitto/conf.d/default.conf
 ```
 
-3.2.2) Desabilitar acesso anônimo e indicar lista de usuários. Colar dentro de default.conf
+5) Desabilitar acesso anônimo e indicar lista de usuários. Colar dentro de default.conf
 
 ```
 allow_anonymous false
 password_file /etc/mosquitto/passwd
 ```
 
-3.2.3) Reiniciar serviço para pegar as mudanças
+6) Reiniciar serviço para pegar as mudanças
 
 ```
 $ sudo systemctl restart mosquitto
 ```
-
-3.2.4) Publicar mensagem em um tópico com autenticação
+7) Publicar mensagem em um tópico com autenticação
 
 ```
-$ sudo mosquitto_pub -t "test" -m "mensagem enviada com autenticação" -u "algum-login" -P "password"
+$ sudo mosquitto_pub -t "casa/L2" -m "mensagem enviada com autenticação" -u "yuri" -P "password"
+```
+
+8) Criar tópico e enviar mensagem sem autenticação
+
+```
+$ sudo mosquitto_pub -m "mensagem enviada sem autenticação" -t "casa/L2"
 ```
 
 ##### Client Raspberry
 
-Instalar Mosquitto-client
+1) Instalar Mosquitto-client
 
 ```
 $ sudo apt-get install mosquitto-clients
 ```
 
-Fazer inscrição em um tópico sem autenticação
+2) Fazer inscrição em um tópico sem autenticação
 
 ```
-$ sudo mosquitto_sub -t "test"
+$ sudo mosquitto_sub -t "casa/L2"
 ```
 
-Fazer inscrição em um tópico com autenticação
+3) Fazer inscrição em um tópico com autenticação
 
 ```
-$ sudo mosquitto_sub -t "test" -u "algum-login" -P "password"
+$ sudo mosquitto_sub -t "casa/L2" -u "yuri" -P "password"
 ```
 
 Caso um cliente assine um tópico que exija autenticação sem enviar os parâmetros corretos receberá a mensagem de erro, o mesmo pode ocorrer quando um tópico originalmente anônimo passa a ser autenticado derrubando os clientes antes conectados.
@@ -105,6 +110,8 @@ Caso um cliente assine um tópico que exija autenticação sem enviar os parâme
 Connection Refused: not authorised.
 Error: The connection was refused.
 ```
+
+
 
 </p>
 
