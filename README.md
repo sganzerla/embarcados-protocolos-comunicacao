@@ -4,6 +4,8 @@ A comunicação entre dispositivos pode ocorrer pelos mais variados meios: seria
 
 - [AMQP](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/AMQP) - (Advanced Message Queuing Protocol / Protocolo Avançado de Filas de Mensagem)
 
+- [ESP-NOW](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/ESP-NOW)
+
 - [I2C](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/I2C) - (Inter-Integrated Circuit / Circuito InterIntegrado)
 
 - [MQTT](https://github.com/sganzerla/embarcados-protocolos-comunicacao/tree/master/MQTT) - (Message Queue Telemetry Transport /  Filas de Transporte de Mensagens deTelemetria)
