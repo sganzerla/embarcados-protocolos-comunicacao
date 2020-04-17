@@ -16,7 +16,11 @@ O protocolo `I2C` funciona com a ideia de hierarquia onde existe um dispositivo 
 
 Para que seja possível que o mestre envie dados para um determinado escravo ele precisa saber o endereço do dispositivo, que está no formato hexadecimal. Pode ocorrer, muito raramente, de dois dispositos totalmente diferentes possuírem o mesmo endereço, nesses casos pode-se verificar se um dos dispositivos que estão em conflito possuem recurso para mudarem o endereço.
 
-Um exemplo de alteração de endereços é o dos acelerômetros `GY-521`. Se o pino `ADO` estiver alimentado o endereço do dispositivo é `0x69` senão estiver ele será `0x68`.
+Um exemplo de alteração de endereços é o dos acelerômetros `GY-521`.
+
+![image](https://user-images.githubusercontent.com/22710963/79520562-8ca92380-802d-11ea-8e24-e6dd1e45c5f7.png)
+
+Se o pino `ADO` estiver alimentado o endereço do dispositivo é `0x69` senão estiver ele será `0x68`.
 
 ![image](https://user-images.githubusercontent.com/22710963/79519760-24594280-802b-11ea-9c6d-3109892b7245.png)
 
