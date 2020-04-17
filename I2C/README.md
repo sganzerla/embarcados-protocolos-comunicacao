@@ -22,7 +22,7 @@ Um exemplo de alteração de endereços é o dos acelerômetros `GY-521`. Se o p
 
 Com esse código é possível testar se o endereço de um acelerômetro está correto com a ligação dos fios.
 
-´´´
+```
 #include "Wire.h"
 
 const int MPU_addr=0x69; // I2C address of the MPU-6050
@@ -52,7 +52,7 @@ Serial.println("No Device Found");
 delay(5000); // Wait 5 seconds and scan again
 }
 
-´´´
+```
 
 Nesse outro exemplo abaixo o módulo `I2C` para Display LCD possui esse recurso também, bastando fazer uma ligação de solda nos pinos `A0`, `A1` ou `A2`.
 
