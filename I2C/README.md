@@ -97,3 +97,5 @@ Após o reconhecimento do dispositivo escravo o mestre envia os dados em duas pa
 ### Fonte
 
 [Auto Core Robótica](http://autocorerobotica.blog.br/conhecendo-o-protocolo-i2c-com-arduino) - Acessado em Março de 2020.
+
+[Oliver Technology Development](https://olivertechnologydevelopment.wordpress.com/2017/08/17/esp8266-sensor-series-gy-521-imu-part-1) - Acessado em Maio de 2020.
