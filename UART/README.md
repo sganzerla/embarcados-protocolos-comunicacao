@@ -1,7 +1,8 @@
 # Protocolo UART (Universal Asynchronous Receiver/Transmiter)
-<p>]
-  Protocolo Receptor/Transmissor Universal Assíncrono. Não existe um sinal de clock para sincronizar o sinal transmitido com o sinal recebido. É full duplex.
-</p>
+
+## Introdução
+
+Protocolo Receptor/Transmissor Universal Assíncrono. Não existe um sinal de clock para sincronizar o sinal transmitido com o sinal recebido. É full duplex.
 
 
 <p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77001201-4d0cf000-6938-11ea-8ec1-f7c2754ca190.png">

@@ -90,7 +90,7 @@ Se a função de envio retornar o endereço MAC especificado, será enviada para
 
 ### Exemplo Código
 
-´´´
+```
 void ICACHE_FLASH_ATTR simple_cb(u8 *macaddr, u8 *data, u8 len)
 {
    int i;
@@ -131,6 +131,7 @@ void ICACHE_FLASH_ATTR demo_send(u8 *mac_addr, u8 *data, u8 len)
    esp_now_send(NULL, data, len); /* the demo will send to two devices which added by esp_now_add_peer() */
    //esp_now_send(mac_addr, data, len); /* send to the specified mac_addr * /
 }
+```
 
 ## Fonte
 
