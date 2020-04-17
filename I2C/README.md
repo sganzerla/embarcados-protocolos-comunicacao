@@ -2,7 +2,7 @@
 
 ## Introdução
 
-Desenvolvido pela `Philips` nos anos 80,  com o propósito de padronizar a comunicação entre diferentes dispositivos. Necessita apenas de dois pinos (`SDA` - para dados, `SCL` - `clock`) para conectar até 112 dispositivos para barramentos de 7 bits. Possui uma média de operação por volta de 400KHz, alguns dispositivos que utilizam esse tipo de interface são: display LCDs, RTCs (relógios)...
+Desenvolvido pela `Philips` nos anos 80,  com o propósito de padronizar a comunicação entre diferentes dispositivos. Necessita apenas de dois pinos (`SDA` - para dados, `SCL` - `clock`) para conectar até 112 dispositivos para barramentos de 7 bits. Possui uma média de operação por volta de 400KHz, alguns dispositivos que utilizam esse tipo de interface são: display LCDs, RTCs (relógios), acelerômetros ...
 
 ### Funcionamento
 
@@ -10,15 +10,56 @@ O protocolo `I2C` funciona com a ideia de hierarquia onde existe um dispositivo 
 
 ![image](https://user-images.githubusercontent.com/22710963/76994427-1bdaf280-692d-11ea-9c8b-17a251de3d41.png)
 
- Por ser do tipo Half Duplex, podem ocorrer alguns atrasos, quando o mestre enviar uma dado e o escravo não conseguir tratá-los fazendo com que o mestre force uma estado de espera. Não é possível inverter os pinos nesse barramento, `SDA` tem que ser ligado com `SDA` e `SCL` com `SCL`.
+ Por ser do tipo `Half Duplex`, podem ocorrer alguns atrasos, quando o mestre enviar uma dado e o escravo não conseguir tratá-los fazendo com que o mestre force uma estado de espera. Não é possível inverter os pinos nesse barramento, `SDA` tem que ser ligado com `SDA` e `SCL` com `SCL`.
 
 ### Endereços no barramento
 
-Para que seja possível que o mestre envie dados para um determinado escravo ele precisa saber o endereço, que está no formato hexadecimal, do dispositivo. Pode ocorrer, muito raramente, de dois dispositos totalmente diferentes possuírem o mesmo endereço, nesses casos pode-se verificar se um dos dispositivos que estão em conflito possuem recurso para mudarem o endereço.
+Para que seja possível que o mestre envie dados para um determinado escravo ele precisa saber o endereço do dispositivo, que está no formato hexadecimal. Pode ocorrer, muito raramente, de dois dispositos totalmente diferentes possuírem o mesmo endereço, nesses casos pode-se verificar se um dos dispositivos que estão em conflito possuem recurso para mudarem o endereço.
 
-Nesse exemplo abaixo o módulo `I2C` para Display LCD possui esse recurso, bastando fazer uma ligação de solda nos pinos `A0`, `A1` ou `A2`.
+Um exemplo de alteração de endereços é o dos acelerômetros `GY-521`. Se o pino `ADO` estiver alimentado o endereço do dispositivo é `0x69` senão estiver ele será `0x68`.
+
+![image](https://user-images.githubusercontent.com/22710963/79519760-24594280-802b-11ea-9c6d-3109892b7245.png)
+
+Com esse código é possível testar se o endereço de um acelerômetro está correto com a ligação dos fios.
+
+´´´
+#include "Wire.h"
+
+const int MPU_addr=0x69; // I2C address of the MPU-6050
+
+void setup() {
+Wire.begin();
+
+Serial.begin(115200);
+}
+
+void loop() {
+byte error;
+// We are using the return value of
+// the Write.endTransmisstion to see if
+// a device did acknowledge to the address.
+Wire.beginTransmission(MPU_addr);
+error = Wire.endTransmission();
+
+if (error == 0)
+{
+Serial.println("Device Found");
+}
+else
+{
+Serial.println("No Device Found");
+}
+delay(5000); // Wait 5 seconds and scan again
+}
+
+´´´
+
+Nesse outro exemplo abaixo o módulo `I2C` para Display LCD possui esse recurso também, bastando fazer uma ligação de solda nos pinos `A0`, `A1` ou `A2`.
 
 ![image](https://user-images.githubusercontent.com/22710963/79517081-8615ae80-8023-11ea-8ea9-feefc6d5cd8f.png)
+
+
+#### Diferença de ligação com I2C
 
 Ligação de Tela LCD sem conexão `I2C`
 
