@@ -1,83 +1,87 @@
-/*
-  Rui Santos
-  Complete project details at https://RandomNerdTutorials.com/esp-now-esp8266-nodemcu-arduino-ide/
-  
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files.
-  
-  The above copyright notice and this permission notice shall be included in all
-  copies or substantial portions of the Software.
-*/
-
 #include <ESP8266WiFi.h>
+extern "C"
+{
 #include <espnow.h>
-
-// REPLACE WITH RECEIVER MAC Address
-uint8_t broadcastAddress[] = {'2C:F4:32:78:6A:29', '2C:F4:32:78:6D:55'};
-
-// Structure example to send data
-// Must match the receiver structure
-typedef struct struct_message
-{
-    char a[32];
-    int b;
-    float c;
-    String d;
-    bool e;
-} struct_message;
-
-// Create a struct_message called myData
-struct_message myData;
-
-// Callback when data is sent
-void OnDataSent(uint8_t *mac_addr, uint8_t sendStatus)
-{
-    Serial.print("Last Packet Send Status: ");
-    if (sendStatus == 0)
-    {
-        Serial.println("Delivery success");
-    }
-    else
-    {
-        Serial.println("Delivery fail");
-    }
 }
+
+//***ESTRUCTURA DE LOS DATOS TRANSMITIDOS MAESTRO/ESCLAVO***//
+//Se de establecer IGUAL en el par esclavo
+struct ESTRUCTURA_DATOS
+{
+    uint16_t potenciometro;
+    uint32_t tiempo;
+};
 
 void setup()
 {
-    // Init Serial Monitor
+
+    //***INICIALIZACIÓN DEL PUERTO SERIE***//
     Serial.begin(115200);
+    Serial.println();
+    Serial.println();
 
-    // Set device as a Wi-Fi Station
-    WiFi.mode(WIFI_STA);
-
-    // Init ESP-NOW
+    //***INICIALIZACIÓN DEL PROTOCOLO ESP-NOW***//
     if (esp_now_init() != 0)
     {
-        Serial.println("Error initializing ESP-NOW");
-        return;
+        Serial.println("*** ESP_Now init failed");
+        ESP.restart();
+        delay(1);
     }
 
-    // Once ESPNow is successfully Init, we will register for Send CB to
-    // get the status of Trasnmitted packet
-    esp_now_set_self_role(ESP_NOW_ROLE_CONTROLLER);
-    esp_now_register_send_cb(OnDataSent);
+    //***DATOS DE LAS MAC (Access Point y Station) del ESP***//
+    Serial.print("Access Point MAC de este ESP: ");
+    Serial.println(WiFi.softAPmacAddress());
+    Serial.print("Station MAC de este ESP: ");
+    Serial.println(WiFi.macAddress());
 
-    // Register peer
-    esp_now_add_peer(broadcastAddress, ESP_NOW_ROLE_SLAVE, 1, NULL, 0);
+    //***DECLARACIÓN DEL PAPEL DEL DISPOSITIVO ESP EN LA COMUNICACIÓN***//
+    //0=OCIOSO, 1=MAESTRO, 2=ESCLAVO y 3=MAESTRO+ESCLAVO
+    esp_now_set_self_role(1);
+
+    //***EMPAREJAMIENTO CON EL ESCLAVO***//
+    // Dirección MAC del ESP con el que se empareja (esclavo)
+    // Se debe introducir la STA MAC correspondiente
+    uint8_t mac_addr[6] = {0xD8, 0xF1, 0x5B, 0x0C, 0xDE, 0x4B}; // STA MAC esclavo
+    uint8_t role = 2;
+    uint8_t channel = 3;
+    uint8_t key[0] = {}; //no hay clave
+    //uint8_t key[16] = {0,255,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    uint8_t key_len = sizeof(key);
+    Serial.print("Tamaño de *key: ");
+    Serial.println(key_len);
+    esp_now_add_peer(mac_addr, role, channel, key, key_len);
 }
 
 void loop()
 {
-    // Set values to send
-    strcpy(myData.a, "THIS IS A CHAR");
-    myData.b = random(1, 20);
-    myData.c = 1.2;
-    myData.d = "Hello";
-    myData.e = false;
 
-    // Send message via ESP-NOW
-    esp_now_send(broadcastAddress, (uint8_t *)&myData, sizeof(myData));
+    //***DATOS A ENVIAR***//
+    ESTRUCTURA_DATOS ED;
+    ED.potenciometro = analogRead(A0);
+    Serial.print("Dato potenciometro: ");
+    Serial.print(ED.potenciometro);    
+    ED.tiempo = millis();
+    Serial.print(". Dato tiempo: ");
+    Serial.print(ED.tiempo);
+    delay(20);
+    
+    //***ENVÍO DE LOS DATOS***//
+    //uint8_t *da=NULL; //NULL envía los datos a todos los ESP con los que está emparejado
+    uint8_t da[6] = {0xD8, 0xF1, 0x5B, 0x0C, 0xDE, 0x4B}; // ¿mismos datos que STA MAC?
+    uint8_t data[sizeof(ED)];
+    memcpy(data, &ED, sizeof(ED));
+    uint8_t len = sizeof(data);
+    esp_now_send(da, data, len);
 
-    delay(2000);
+    delay(1); //Si se pierden datos en la recepción se debe subir este valor
+
+    //***VERIFICACIÓN DE LA RECEPCIÓN CORRECTA DE LOS DATOS POR EL ESCLAVO***//
+    esp_now_register_send_cb([](uint8_t *mac, uint8_t status) {
+        char MACesclavo[6];
+        sprintf(MACesclavo, "%02X:%02X:%02X:%02X:%02X:%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+        Serial.print(". Enviado a ESP MAC: ");
+        Serial.print(MACesclavo);
+        Serial.print(". Recepcion (0=0K - 1=ERROR): ");
+        Serial.println(status);
+    });
 }
