@@ -22,64 +22,71 @@ extern "C"
 #include <espnow.h>
 }
 
-//***ESTRUCTURA DE LOS DATOS TRANSMITIDOS MAESTRO/ESCLAVO***//
-//Se de establecer IGUAL en el par maestro
-struct ESTRUCTURA_DATOS
+/*
+Estrutura de dados criada para transmitir os dados entre MASTER/SLAVE
+Essa estrutura deve ser a mesma tanto no MASTER quanto no SLAVE
+*/
+
+struct ESTRUTURA_DADOS
 {
     uint16_t potenciometro = 0;
-    uint32_t tiempo = 0;
+    uint32_t tempo = 0;
 };
 
-//***PIN de conexión del LED a regular con el potenciometro del ESP MAESTRO***//
-int PinLED = 5; //Pin D1
+/*
+PIN LED servem para para indicar a mudança de valor das mensagens 
+recebidas do potenciometro dos dispositivos MESTRE em tempo real
+Cada MESTRE conectado deve ter um LED no SLAVE
+*/
+#define PIN_LED_BL D5 // LED AZUL
+#define PIN_LED_GR D6 // LED VERDE
 
 void setup()
 {
-
-    //***INICIALIZACIÓN DEL PUERTO SERIE***//
     Serial.begin(115200);
     Serial.println();
 
-    //***INICIALIZACIÓN DEL PROTOCOLO ESP-NOW***//
+    // Inicializando protocolo ESP-NOW
     if (esp_now_init() != 0)
     {
-        Serial.println("Protocolo ESP-NOW no inicializado...");
+        Serial.println("Erro esp_now_init() ... reconectando.");
         ESP.restart();
         delay(1);
     }
 
-    //***DATOS DE LAS MAC (Access Point y Station) del ESP***//
-    Serial.print("AP MAC: ");
+    // Printando o MAC MASTER e SLAVE do dispositivo
+    Serial.print("SoftAP MAC: ");
     Serial.println(WiFi.softAPmacAddress());
-    Serial.print("STA MAC: ");
+    Serial.print("STATION MAC: ");
     Serial.println(WiFi.macAddress());
 
-    //***DECLARACIÓN DEL PAPEL DEL DISPOSITIVO ESP EN LA COMUNICACIÓN***//
-    //0=OCIOSO, 1=MAESTRO, 2=ESCLAVO y 3=MAESTRO+ESCLAVO
+    // Definindo papel desse dispositivo conforme enum da documentação
+    // 0=OCIOSO, 1=MASTER, 2=SLAVE y 3=MASTER+SLAVE
     esp_now_set_self_role(2);
 
-    //***DECLARACIÓN del PinLED como SALIDA***//
-    pinMode(PinLED, OUTPUT);
+    // Declarando LEDs do MASTER
+    pinMode(PIN_LED_BL, OUTPUT);
+    pinMode(PIN_LED_GR, OUTPUT);
 }
 
 void loop()
 {
 
-    //***RECEPCIÓN DE LA COMUNICACIÓN ESP-NOW***//
-    esp_now_register_recv_cb([](uint8_t *mac, uint8_t *data, uint8_t len) {
-        char MACmaestro[6];
-        sprintf(MACmaestro, "%02X:%02X:%02X:%02X:%02X:%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
-        Serial.print("Recepcion desde ESP MAC: ");
-        Serial.print(MACmaestro);
+    // Recebendo mensagens de ESP-NOW MASTER
+     esp_now_register_recv_cb([](uint8_t *mac, uint8_t *data, uint8_t len) {
+        char MasterMAC[6];
+        sprintf(MasterMAC, "%02X:%02X:%02X:%02X:%02X:%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+        Serial.print("Recebido do MAC MASTER: ");
+        Serial.print(MasterMAC);
 
-        ESTRUCTURA_DATOS ED;
+        ESTRUTURA_DADOS ED;
         memcpy(&ED, data, sizeof(ED));
 
-        Serial.print(". Dato potenciometro: ");
+        Serial.print(". Potenciômetro: ");
         Serial.print(ED.potenciometro);
-        Serial.print(". Dato tiempo: ");
-        Serial.println(ED.tiempo);
+        Serial.print(". Tempo: ");
+        Serial.println(ED.tempo);
 
-        analogWrite(PinLED, ED.potenciometro);
+        analogWrite(PIN_LED_BL, ED.potenciometro);
     });
 }

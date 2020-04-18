@@ -22,51 +22,52 @@ extern "C"
 #include <espnow.h>
 }
 
-//***ESTRUCTURA DE LOS DATOS TRANSMITIDOS MAESTRO/ESCLAVO***//
-//Se de establecer IGUAL en el par esclavo
-struct ESTRUCTURA_DATOS
+/*
+Estrutura de dados criada para transmitir os dados entre MASTER/SLAVE
+Essa estrutura deve ser a mesma tanto no MASTER quanto no SLAVE
+*/
+
+struct ESTRUTURA_DADOS
 {
-    uint16_t potenciometro;
-    uint32_t tiempo;
+    uint16_t potenciometro = 0;
+    uint32_t tempo = 0;
 };
 
 void setup()
 {
-
-    //***INICIALIZACIÓN DEL PUERTO SERIE***//
     Serial.begin(115200);
     Serial.println();
     Serial.println();
 
-    //***INICIALIZACIÓN DEL PROTOCOLO ESP-NOW***//
+   // Inicializando protocolo ESP-NOW
     if (esp_now_init() != 0)
     {
-        Serial.println("*** ESP_Now init failed");
+        Serial.println("Erro esp_now_init() ... reconectando.");
         ESP.restart();
         delay(1);
     }
 
-    //***DATOS DE LAS MAC (Access Point y Station) del ESP***//
-    Serial.print("Access Point MAC de este ESP: ");
+      // Printando o MAC MASTER e SLAVE do dispositivo
+    Serial.print("SoftAP MAC: ");
     Serial.println(WiFi.softAPmacAddress());
-    Serial.print("Station MAC de este ESP: ");
+    Serial.print("STATION MAC: ");
     Serial.println(WiFi.macAddress());
 
-    //***DECLARACIÓN DEL PAPEL DEL DISPOSITIVO ESP EN LA COMUNICACIÓN***//
-    //0=OCIOSO, 1=MAESTRO, 2=ESCLAVO y 3=MAESTRO+ESCLAVO
+    // Definindo papel desse dispositivo conforme enum da documentação
+    // 0=OCIOSO, 1=MASTER, 2=SLAVE y 3=MASTER+SLAVE
     esp_now_set_self_role(1);
-
-    //***EMPAREJAMIENTO CON EL ESCLAVO***//
-    // Dirección MAC del ESP con el que se empareja (esclavo)
-    // Se debe introducir la STA MAC correspondiente
-    uint8_t mac_addr[6] = {0xA4, 0xCF, 0x12, 0xDF, 0x5A, 0x6B}; // STA MAC esclavo
+    
+    // Pareamento com o dispositivo SLAVE
+    // Definir STATION MAC do dispositivo SLAVE aqui
+    uint8_t mac_addr[6] = {0xA4, 0xCF, 0x12, 0xDF, 0x5A, 0x6B}; 
     uint8_t role = 2;
     uint8_t channel = 3;
-    uint8_t key[0] = {}; //no hay clave
-    //uint8_t key[16] = {0,255,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    uint8_t key[0] = {}; // pode-se definir uma chave //uint8_t key[16] = {0,255,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
     uint8_t key_len = sizeof(key);
-    Serial.print("Tamaño de *key: ");
+    Serial.print("Tamanho da chave: ");
     Serial.println(key_len);
+
+    // adicionando pareamento
     esp_now_add_peer(mac_addr, role, channel, key, key_len);
 }
 
@@ -74,14 +75,14 @@ void loop()
 {
 
     //***DATOS A ENVIAR***//
-    ESTRUCTURA_DATOS ED;
+    ESTRUTURA_DADOS ED;
     ED.potenciometro = analogRead(A0);
     Serial.print("Dato potenciometro: ");
     Serial.print(ED.potenciometro);
     delay(20);
-    ED.tiempo = millis();
+    ED.tempo = millis();
     Serial.print(". Dato tiempo: ");
-    Serial.print(ED.tiempo);
+    Serial.print(ED.tempo);
 
     //***ENVÍO DE LOS DATOS***//
     //uint8_t *da=NULL; //NULL envía los datos a todos los ESP con los que está emparejado
@@ -103,4 +104,3 @@ void loop()
         Serial.println(status);
     });
 }
-view raw
