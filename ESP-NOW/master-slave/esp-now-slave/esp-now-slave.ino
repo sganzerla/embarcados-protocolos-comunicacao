@@ -40,10 +40,10 @@ Cada MESTRE conectado deve ter um LED no SLAVE
 */
 #define PIN_LED_BLUE D5
 // STATION MAC
-char *mac_addres_led_blue = '2C:F4:32:78:6D:55';
+char *mac_address_led_blue = "2C:F4:32:78:6D:55";
 #define PIN_LED_GREEN D6
-// STATIO MAC
-char *mac_addres_led_green = "2C:F4:32:78:6A:29";
+// STATIOn MAC
+char *mac_address_led_green = "2C:F4:32:78:6A:29";
 void setup()
 {
     Serial.begin(115200);
@@ -77,26 +77,28 @@ void loop()
 
     // Recebendo mensagens de ESP-NOW MASTER
     esp_now_register_recv_cb([](uint8_t *mac, uint8_t *data, uint8_t len) {
-        char MasterMAC[6];
-        sprintf(MasterMAC, "%02X:%02X:%02X:%02X:%02X:%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
-        //   Serial.print("Recebido de MASTER MAC: ");
-        //  Serial.print(MasterMAC);
+        char masterMAC[6]; 
+        sprintf(masterMAC, "%02X:%02X:%02X:%02X:%02X:%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+        Serial.print("Recebido de MASTER MAC: ");
+        Serial.print(masterMAC);
 
         ESTRUTURA_DADOS ED;
+
+        // copia n caracteres de uma área da memória de origem para uma
+        // área de destino
+        // void *memcpy(void *dest, const void * src, size_t n)
         memcpy(&ED, data, sizeof(ED));
 
-        //  Serial.print(". Potenciômetro: ");
-        //   Serial.print(ED.potenciometro);
-        //  Serial.print(". Tempo: ");
-        //   Serial.println(ED.tempo);
+       Serial.print(". Potenciômetro: ");
+        Serial.print(ED.potenciometro);
+        Serial.print(". Tempo: ");
+        Serial.println(ED.tempo);
         Serial.println();
-        Serial.print(MasterMAC);
-        Serial.print("=");
-        Serial.print(mac_addres_led_blue);
-        if (MasterMAC == mac_addres_led_blue)
+
+      //  if (masterMAC == mac_address_led_blue)
             analogWrite(PIN_LED_BLUE, ED.potenciometro);
 
-        if (MasterMAC == mac_addres_led_green)
+      //  if (masterMAC == mac_address_led_green)
             analogWrite(PIN_LED_GREEN, ED.potenciometro);
     });
 }

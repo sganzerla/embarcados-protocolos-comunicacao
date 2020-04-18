@@ -30,7 +30,7 @@ Essa estrutura deve ser a mesma tanto no MASTER quanto no SLAVE
 struct ESTRUTURA_DADOS
 {
     uint16_t potenciometro = 0;
-    uint32_t tempo = 0;
+    uint32_t tempo = 0; 
 };
 
 void setup()
