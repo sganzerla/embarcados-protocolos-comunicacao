@@ -44,6 +44,30 @@ Corrente em placas NodeMCU é 3v então não é necessário utilizar um resistor
 
 ![image](https://user-images.githubusercontent.com/22710963/79627091-cc463d00-810b-11ea-9e62-4553dbd829e2.png)
 
+### Identificar o `MAC` dos `NodeMCU ESP8266`
+
+Antes de publicar o código nas placas é necessário descobrir o endereço `MAC` das placas para definir os pareamentos. Cada placa possui endereços distintos para comunicação como  `SOFTAP` e para comunicação como `STATION`, eles podem ser identificados usando o seguinte script.
+
+´´´
+#include <ESP8266WiFi.h>
+void setup()
+{
+    Serial.begin(115200);
+    Serial.println();
+    Serial.println();
+    Serial.print("AP MAC: ");
+    Serial.println(WiFi.softAPmacAddress());
+    Serial.print("STA MAC: ");
+    Serial.println(WiFi.macAddress());
+    estacion-station
+}
+void loop() {}
+´´´
+
+### Fluxograma de comunicação `MASTER` X `SLAVE`
+
+![image](https://user-images.githubusercontent.com/22710963/79627929-d7e93200-8112-11ea-9017-0fac7e9934fd.png)
+
 ## Fonte
 
 [AGR Portfólio Educativo](http://agrportfolioeducativo.blogspot.com/2020/03/nodemcu-04espnow-comunicacion.html) - Acessado em Maio 2020.
