@@ -42,7 +42,7 @@ Corrente em placas NodeMCU é 3v então não é necessário utilizar um resistor
 
 ### Montagem do Circuito
 
-
+![image](https://user-images.githubusercontent.com/22710963/79627091-cc463d00-810b-11ea-9e62-4553dbd829e2.png)
 
 ## Fonte
 
