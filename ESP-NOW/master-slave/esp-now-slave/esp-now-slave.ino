@@ -38,9 +38,12 @@ PIN LED servem para para indicar a mudança de valor das mensagens
 recebidas do potenciometro dos dispositivos MESTRE em tempo real
 Cada MESTRE conectado deve ter um LED no SLAVE
 */
-#define PIN_LED_BL D5 // LED AZUL
-#define PIN_LED_GR D6 // LED VERDE
-
+#define PIN_LED_BLUE D5
+// STATION MAC
+char *mac_addres_led_blue = '2C:F4:32:78:6D:55';
+#define PIN_LED_GREEN D6
+// STATIO MAC
+char *mac_addres_led_green = "2C:F4:32:78:6A:29";
 void setup()
 {
     Serial.begin(115200);
@@ -65,28 +68,35 @@ void setup()
     esp_now_set_self_role(2);
 
     // Declarando LEDs do MASTER
-    pinMode(PIN_LED_BL, OUTPUT);
-    pinMode(PIN_LED_GR, OUTPUT);
+    pinMode(PIN_LED_BLUE, OUTPUT);
+    pinMode(PIN_LED_GREEN, OUTPUT);
 }
 
 void loop()
 {
 
     // Recebendo mensagens de ESP-NOW MASTER
-     esp_now_register_recv_cb([](uint8_t *mac, uint8_t *data, uint8_t len) {
+    esp_now_register_recv_cb([](uint8_t *mac, uint8_t *data, uint8_t len) {
         char MasterMAC[6];
         sprintf(MasterMAC, "%02X:%02X:%02X:%02X:%02X:%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
-        Serial.print("Recebido do MAC MASTER: ");
-        Serial.print(MasterMAC);
+        //   Serial.print("Recebido de MASTER MAC: ");
+        //  Serial.print(MasterMAC);
 
         ESTRUTURA_DADOS ED;
         memcpy(&ED, data, sizeof(ED));
 
-        Serial.print(". Potenciômetro: ");
-        Serial.print(ED.potenciometro);
-        Serial.print(". Tempo: ");
-        Serial.println(ED.tempo);
+        //  Serial.print(". Potenciômetro: ");
+        //   Serial.print(ED.potenciometro);
+        //  Serial.print(". Tempo: ");
+        //   Serial.println(ED.tempo);
+        Serial.println();
+        Serial.print(MasterMAC);
+        Serial.print("=");
+        Serial.print(mac_addres_led_blue);
+        if (MasterMAC == mac_addres_led_blue)
+            analogWrite(PIN_LED_BLUE, ED.potenciometro);
 
-        analogWrite(PIN_LED_BL, ED.potenciometro);
+        if (MasterMAC == mac_addres_led_green)
+            analogWrite(PIN_LED_GREEN, ED.potenciometro);
     });
 }
