@@ -6,17 +6,17 @@ Este tutorial é baseado na publicação do [Portfólio Educativo](http://agrpor
 
 ### Visão geral
 
-Com esse tutorial será possível enviar mensagens via ESP-NOW do dispositivo `MASTER` para o dispositivo `SLAVE` utilizando dois ou mais `NodeMCU ESP8266`.
+Com esse tutorial será possível enviar mensagens via ESP-NOW de um dispositivo `MASTER` para um dispositivo `SLAVE` utilizando dois ou mais `NodeMCU ESP8266`.
 
-Nesse exemplo, será utilizado um potenciômetro no dispositivo `MASTER` para que envio o valor lido na porta analógica para o dispositivo `SLAVE` e com isso acendendo um led e variando a intensidade da luz.
+As mensagens nesse exemplo serão os valores lidos numa porta analógica de um potenciômetro no dispositivo `MASTER`. Os valores enviados para o dispositivo `SLAVE` acenderão um led variando a intensidade da luz conforme o valor recebido (0 - 1024).
 
 ### Hardware necessário
 
-a - 2 NodeMCU ESP8266 ou mais
-b - 1 Potenciômetro de 500k
-c - 1 Protoboard de 400 pinos
-d - 1 LED 5V  (1 para cada `MASTER`)
-e - 5 Fio de conexão (`Jumper` tipo macho)
+- a) 2 NodeMCU ESP8266 ou mais
+- b) 1 Potenciômetro de 500k
+- c) 1 Protoboard de 400 pinos
+- d) 1 LED 5V  (1 para cada `MASTER`)
+- e) 5 Fio de conexão (`Jumper` tipo macho)
 
 #### a) NodeMCU ESP8266
 
@@ -44,11 +44,11 @@ Corrente em placas NodeMCU é 3v então não é necessário utilizar um resistor
 
 ![image](https://user-images.githubusercontent.com/22710963/79627091-cc463d00-810b-11ea-9e62-4553dbd829e2.png)
 
-### Identificar o `MAC` dos `NodeMCU ESP8266`
+### Identificar o MAC dos `NodeMCU ESP8266`
 
-Antes de publicar o código nas placas é necessário descobrir o endereço `MAC` das placas para definir os pareamentos. Cada placa possui endereços distintos para comunicação como  `SOFTAP` e para comunicação como `STATION`, eles podem ser identificados usando o seguinte script.
+Antes de publicar o código nas placas é necessário descobrir o endereço MAC das placas para definir os pareamentos. Cada placa possui endereços distintos para comunicação como  `SOFTAP` e para comunicação como `STATION`, eles podem ser identificados usando o seguinte script.
 
-´´´
+```
 #include <ESP8266WiFi.h>
 void setup()
 {
@@ -62,7 +62,7 @@ void setup()
     estacion-station
 }
 void loop() {}
-´´´
+```
 
 ### Fluxograma de comunicação `MASTER` X `SLAVE`
 
