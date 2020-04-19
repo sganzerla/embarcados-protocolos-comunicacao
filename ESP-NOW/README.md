@@ -43,7 +43,6 @@ As informações envolvidas sobre:
 
 ![image](https://user-images.githubusercontent.com/22710963/79470613-031b3680-7fd8-11ea-9071-79c3063639b2.png)
 
-
 ### Funcionamento
 
 #### Definir o envio da função de `callback`
@@ -136,5 +135,3 @@ void ICACHE_FLASH_ATTR demo_send(u8 *mac_addr, u8 *data, u8 len)
 ## Fonte
 
 [ESP-NOW User Guide - 2016](https://www.espressif.com/sites/default/files/documentation/esp-now_user_guide_en.pdf) - Acessado em Maio 2020.
-
-[Random Nerd Tutorials](https://randomnerdtutorials.com/esp-now-esp8266-nodemcu-arduino-ide) - Acessado em Maio 2020.

@@ -59,7 +59,6 @@ void setup()
     Serial.println(WiFi.softAPmacAddress());
     Serial.print("STA MAC: ");
     Serial.println(WiFi.macAddress());
-    estacion-station
 }
 void loop() {}
 ```

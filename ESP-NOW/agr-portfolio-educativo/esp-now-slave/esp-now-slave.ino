@@ -38,12 +38,8 @@ PIN LED servem para para indicar a mudança de valor das mensagens
 recebidas do potenciometro dos dispositivos MESTRE em tempo real
 Cada MESTRE conectado deve ter um LED no SLAVE
 */
-#define PIN_LED_BLUE D5
-// STATION MAC
-char *mac_address_led_blue = "2C:F4:32:78:6D:55";
-#define PIN_LED_GREEN D6
-// STATIOn MAC
-char *mac_address_led_green = "2C:F4:32:78:6A:29";
+#define PIN_LED_BLUE D5 
+
 void setup()
 {
     Serial.begin(115200);
@@ -68,8 +64,7 @@ void setup()
     esp_now_set_self_role(2);
 
     // Declarando LEDs do MASTER
-    pinMode(PIN_LED_BLUE, OUTPUT);
-    pinMode(PIN_LED_GREEN, OUTPUT);
+    pinMode(PIN_LED_BLUE, OUTPUT); 
 }
 
 void loop()
@@ -77,7 +72,7 @@ void loop()
 
     // Recebendo mensagens de ESP-NOW MASTER
     esp_now_register_recv_cb([](uint8_t *mac, uint8_t *data, uint8_t len) {
-        char masterMAC[6]; 
+        char masterMAC[6];
         sprintf(masterMAC, "%02X:%02X:%02X:%02X:%02X:%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
         Serial.print("Recebido de MASTER MAC: ");
         Serial.print(masterMAC);
@@ -89,16 +84,12 @@ void loop()
         // void *memcpy(void *dest, const void * src, size_t n)
         memcpy(&ED, data, sizeof(ED));
 
-       Serial.print(". Potenciômetro: ");
+        Serial.print(". Potenciômetro: ");
         Serial.print(ED.potenciometro);
         Serial.print(". Tempo: ");
         Serial.println(ED.tempo);
         Serial.println();
 
-      //  if (masterMAC == mac_address_led_blue)
-            analogWrite(PIN_LED_BLUE, ED.potenciometro);
-
-      //  if (masterMAC == mac_address_led_green)
-            analogWrite(PIN_LED_GREEN, ED.potenciometro);
+        analogWrite(PIN_LED_BLUE, ED.potenciometro);
     });
 }
