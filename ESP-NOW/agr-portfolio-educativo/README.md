@@ -10,6 +10,8 @@ Com esse tutorial será possível enviar mensagens via ESP-NOW de um dispositivo
 
 As mensagens nesse exemplo serão os valores lidos numa porta analógica de um potenciômetro no dispositivo `MASTER`. Os valores enviados para o dispositivo `SLAVE` acenderão um led variando a intensidade da luz conforme o valor recebido (0 - 1024).
 
+[![Vídeo](https://user-images.githubusercontent.com/22710963/79707084-b2cefd80-8291-11ea-9707-5355fad051d5.png)](https://youtu.be/N-B2Ebryfm0)]
+
 ### Hardware necessário
 
 - a) 2 NodeMCU ESP8266 ou mais
