@@ -10,11 +10,11 @@ As mensagens nesse exemplo serão os valores lidos numa porta analógica de um p
 
 ### Hardware necessário
 
-- a) 2 NodeMCU ESP8266 ou mais
-- b) 1 Potenciômetro de 500k
+- a) 3 NodeMCU ESP8266 ou mais
+- b) 2 Potenciômetro de 500k
 - c) 1 Protoboard de 400 pinos
-- d) 1 LED 5V  (1 para cada `MASTER`)
-- e) 5 Fio de conexão (`Jumper` tipo macho)
+- d) 2 LED 5V  (1 para cada `MASTER`)
+- e) 6-10 Fio de conexão (`Jumper` tipo macho)
 
 #### a) NodeMCU ESP8266
 
