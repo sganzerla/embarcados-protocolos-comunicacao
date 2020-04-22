@@ -1,173 +1,83 @@
-/*
- Testing ESP-Now
- See https://espressif.com/en/products/software/esp-now/overview
- ESP-Now enables fast lightwieght connectionless communication between ESP8266's.
- So for example a remote sensor node could send a reading using ESP-Now in just a few
- hundred milliseconds and deepSleep the rest of the time and so get increased battery
- life compared to the node using a regular WiFi connection which could take 10 times
- as long to connect to WiFi and send a sensor reading.
- 
- ESP-Now has the concept of controllers and slaves. AFAICT the controller is the remote
- sensor node and the slave is the always on "gateway" node that listens for sensor node readings.
- *** Note: to compile ESP-Now (with arduino/esp8266 release 2.3.0) need to edit
- * ~/Library/Arduino15/packages/esp8266/hardware/esp8266/2.1.0/platform.txt
- * Search "compiler.c.elf.libs", and append "-lespnow" at the end of the line.
- * See: http://www.esp8266.com/viewtopic.php?p=44161#p44161
- ***
- **** This skecth is the slave/gateway node ****
- Ant Elder
- License: Apache License v2
-*/
 #include <ESP8266WiFi.h>
-
 extern "C"
 {
 #include <espnow.h>
 }
 
-const char *ssid = "****";
-const char *password = "****";
+/*
+Estrutura de dados criada para transmitir os dados entre MASTER/SLAVE
+Essa estrutura deve ser a mesma tanto no MASTER quanto no SLAVE
+*/
 
-#define WIFI_CHANNEL 1
-
-// keep in sync with sensor struct
-struct SENSOR_DATA_DHT22
+struct ESTRUTURA_DADOS
 {
-    float temp_dht22;
-    int hum_dht22;
-    float t_dht22;
+    uint16_t potenciometro = 0;
+    uint32_t tempo = 0;
+    String side = "";
 };
 
-struct SENSOR_DATA_DS18B20_1
-{
-    String name_ds18b20_1;
-    float temp_ds18b20_1;
-    float t_ds18b20_1;
-};
-
-struct SENSOR_DATA_DS18B20_2
-{
-    float temp_ds18b20_2;
-    float t_ds18b20_2;
-};
+/*
+PIN LED servem para para indicar a mudança de valor das mensagens 
+recebidas do potenciometro dos dispositivos MESTRE em tempo real
+Cada MESTRE conectado deve ter um LED no SLAVE
+*/
+#define PIN_LED_BLUE D6
+#define PIN_LED_GREEN D7
 
 void setup()
 {
     Serial.begin(115200);
     Serial.println();
 
-    initWifi();
-
+    // Inicializando protocolo ESP-NOW
     if (esp_now_init() != 0)
     {
-        Serial.println("*** ESP_Now init failed");
+        Serial.println("Erro esp_now_init() ... reconectando.");
         ESP.restart();
+        delay(1);
     }
 
-    Serial.print("This node AP mac: ");
-    Serial.print(WiFi.softAPmacAddress());
-    Serial.print(", STA mac: ");
+    // Printando o MAC MASTER e SLAVE do dispositivo
+    Serial.print("SoftAP MAC: ");
+    Serial.println(WiFi.softAPmacAddress());
+    Serial.print("STATION MAC: ");
     Serial.println(WiFi.macAddress());
 
-    // Note: When ESP8266 is in soft-AP+station mode, this will communicate through station interface
-    // if it is in slave role, and communicate through soft-AP interface if it is in controller role,
-    // so you need to make sure the remote nodes use the correct MAC address being used by this gateway.
+    // Definindo papel desse dispositivo conforme enum da documentação
+    // 0=OCIOSO, 1=MASTER, 2=SLAVE y 3=MASTER+SLAVE
     esp_now_set_self_role(ESP_NOW_ROLE_SLAVE);
 
-    esp_now_register_recv_cb([](uint8_t *mac, uint8_t *data_dht22, uint8_t len) {
-        Serial.print("SENSOR 1 recv_cb, from mac: ");
-        char macString[50] = {0};
-        sprintf(macString, "%02X:%02X:%02X:%02X:%02X:%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
-        Serial.print(macString);
+    // Declarando LEDs do MASTER
+    pinMode(PIN_LED_BLUE, OUTPUT);
+    pinMode(PIN_LED_GREEN, OUTPUT);
 
-        getReading_DHT22(data_dht22, len);
-    });
+    // Recebendo mensagens de ESP-NOW MASTER
+    esp_now_register_recv_cb([](uint8_t *mac, uint8_t *data, uint8_t len) {
+        char masterMAC[6];
+        sprintf(masterMAC, "%02X:%02X:%02X:%02X:%02X:%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
 
-    esp_now_register_recv_cb([](uint8_t *mac, uint8_t *data_ds18b20_1, uint8_t len) {
-        Serial.print("SENSOR 2 recv_cb, from mac: ");
-        char macString[50] = {0};
-        sprintf(macString, "%02X:%02X:%02X:%02X:%02X:%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
-        Serial.print(macString);
+        ESTRUTURA_DADOS ED;
 
-        getReading_DS18B20_1(data_ds18b20_1, len);
-    });
+        // copia n caracteres de uma área da memória de origem para uma
+        // área de destino
+        // void *memcpy(void *dest, const void * src, size_t n)
+        memcpy(&ED, data, sizeof(ED));
 
-    esp_now_register_recv_cb([](uint8_t *mac, uint8_t *data_ds18b20_2, uint8_t len) {
-        Serial.print("SENSOR 3 recv_cb, from mac: ");
-        char macString[50] = {0};
-        sprintf(macString, "%02X:%02X:%02X:%02X:%02X:%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
-        Serial.print(macString);
+        Serial.print("Lado: ");
+        Serial.print(ED.side);
+        Serial.print(". Potenciometro: ");
+        Serial.print(ED.potenciometro);
+        Serial.print(". Tempo: ");
+        Serial.print(ED.tempo);
+        Serial.println();
+        if (ED.side == "L")
+            analogWrite(PIN_LED_GREEN, ED.potenciometro);
 
-        getReading_DS18B20_2(data_ds18b20_2, len);
+        if (ED.side == "R")
+            analogWrite(PIN_LED_BLUE, ED.potenciometro);
     });
 }
 
 void loop()
 {
-}
-
-void getReading_DHT22(uint8_t *data_dht22, uint8_t len)
-{
-    SENSOR_DATA_DHT22 tmp_dht22;
-    memcpy(&tmp_dht22, data_dht22, sizeof(tmp_dht22));
-
-    Serial.print(", parsed data, t=");
-    Serial.println(tmp_dht22.t_dht22);
-    Serial.print("Temperature = ");
-    Serial.println(tmp_dht22.temp_dht22);
-    Serial.print("Humidity = ");
-    Serial.println(tmp_dht22.hum_dht22);
-}
-
-void getReading_DS18B20_1(uint8_t *data_ds18b20_1, uint8_t len)
-{
-    SENSOR_DATA_DS18B20_1 tmp_ds18b20_1;
-    memcpy(&tmp_ds18b20_1, data_ds18b20_1, sizeof(tmp_ds18b20_1));
-
-    Serial.print(", parsed data, t=");
-    Serial.println(tmp_ds18b20_1.t_ds18b20_1);
-    Serial.print(tmp_ds18b20_1.name_ds18b20_1);
-    Serial.print(" Temperature = ");
-    Serial.println(tmp_ds18b20_1.temp_ds18b20_1);
-}
-
-void getReading_DS18B20_2(uint8_t *data_ds18b20_2, uint8_t len)
-{
-    SENSOR_DATA_DS18B20_2 tmp_ds18b20_2;
-    memcpy(&tmp_ds18b20_2, data_ds18b20_2, sizeof(tmp_ds18b20_2));
-
-    Serial.print(", parsed data, t=");
-    Serial.println(tmp_ds18b20_2.t_ds18b20_2);
-    Serial.print("Temperature = ");
-    Serial.println(tmp_ds18b20_2.temp_ds18b20_2);
-}
-
-void initWifi()
-{
-
-    WiFi.mode(WIFI_AP_STA);
-    WiFi.softAP("MyGateway", "12345678", WIFI_CHANNEL, 1);
-
-    Serial.print("Connecting to ");
-    Serial.print(ssid);
-    if (strcmp(WiFi.SSID().c_str(), ssid) != 0)
-    {
-        WiFi.begin(ssid, password);
-    }
-
-    int retries = 20; // 10 seconds
-    while ((WiFi.status() != WL_CONNECTED) && (retries-- > 0))
-    {
-        delay(500);
-        Serial.print(".");
-    }
-    Serial.println("");
-    if (retries < 1)
-    {
-        Serial.print("*** WiFi connection failed");
-        ESP.restart();
-    }
-
-    Serial.print("WiFi connected, IP address: ");
-    Serial.println(WiFi.localIP());
 }
