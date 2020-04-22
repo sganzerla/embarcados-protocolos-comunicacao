@@ -8,6 +8,9 @@ Este tutorial é baseado na publicação do [FVML](https://www.fvml.com.br/2020/
 
 Com esse tutorial será possível verificar a comunicação entre dois dispositivos utilizando o protocolo `ESP-NOW` enviando como mensagem o status de um botão no lado `MASTER` e acendendo um led no lado `SLAVE`.
 
+### Vídeo
+[![Vídeo](https://user-images.githubusercontent.com/22710963/80032601-ca8cc880-84c1-11ea-921e-d1b7c1e65e0b.png)](https://youtu.be/FUOs7lKOCe8)]
+
 ### Hardware necessário
 
 - a) 2 NodeMCU ESP8266 ou mais
